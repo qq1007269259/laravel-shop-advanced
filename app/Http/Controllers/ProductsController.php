@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\InvalidRequestException;
 use App\Models\OrderItem;
 use App\Models\Category;
+// use App\Services\CategoryService;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -67,6 +68,8 @@ class ProductsController extends Controller
             ],
             // 等价于 isset($category) ? $category : null
             'category' => $category ?? null,
+            // 将类目树传递给模板文件
+            // 'categoryTree' => $categoryService->getCategoryTree(),
         ]);
     }
 
