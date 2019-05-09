@@ -11,16 +11,10 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class ProductsController extends Controller
+class ProductsController extends CommonProductsController
 {
-    use HasResourceActions;
+    /*use HasResourceActions;
 
-    /**
-     * Index interface.
-     *
-     * @param Content $content
-     * @return Content
-     */
     public function index(Content $content)
     {
         return $content
@@ -28,13 +22,7 @@ class ProductsController extends Controller
             ->body($this->grid());
     }
 
-    /**
-     * Edit interface.
-     *
-     * @param mixed $id
-     * @param Content $content
-     * @return Content
-     */
+
     public function edit($id, Content $content)
     {
         return $content
@@ -42,25 +30,39 @@ class ProductsController extends Controller
             ->body($this->form()->edit($id));
     }
 
-    /**
-     * Create interface.
-     *
-     * @param Content $content
-     * @return Content
-     */
     public function create(Content $content)
     {
         return $content
             ->header('创建商品')
             ->body($this->form());
+    }*/
+
+    public function getProductType()
+    {
+        return Product::TYPE_NORMAL;
     }
 
-    /**
-     * Make a grid builder.
-     *
-     * @return Grid
-     */
-    protected function grid()
+    protected function customGrid(Grid $grid)
+    {
+        $grid->model()->with(['category']);
+        $grid->id('ID')->sortable();
+        $grid->title('商品名称');
+        $grid->column('category.name', '类目');
+        $grid->on_sale('已上架')->display(function ($value) {
+            return $value ? '是' : '否';
+        });
+        $grid->price('价格');
+        $grid->rating('评分');
+        $grid->sold_count('销量');
+        $grid->review_count('评论数');
+    }
+
+    protected function customForm(Form $form)
+    {
+        // 普通商品没有额外的字段，因此这里不需要写任何代码
+    }
+
+   /* protected function grid()
     {
         $grid = new Grid(new Product);
         // 使用 with 来预加载商品类目数据，减少 SQL 查询
@@ -90,14 +92,10 @@ class ProductsController extends Controller
         });
 
         return $grid;
-    }
+    }*/
 
-    /**
-     * Make a form builder.
-     *
-     * @return Form
-     */
-    protected function form()
+
+    /*protected function form()
     {
         $form = new Form(new Product);
         // 在表单中添加一个名为 type，值为 Product::TYPE_NORMAL 的隐藏字段
@@ -137,5 +135,5 @@ class ProductsController extends Controller
         });
 
         return $form;
-    }
+    }*/
 }
