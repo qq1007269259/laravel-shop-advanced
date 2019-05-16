@@ -277,7 +277,7 @@
             axios.post('{{ route('crowdfunding_orders.store') }}', req)
               .then(function (response) {
                 // 订单创建成功，跳转到订单详情页
-                swal('订单提交成功', '', 'success')
+                swal('众筹订单提交成功', '', 'success')
                   .then(() => {
                     location.href = '/orders/' + response.data.id;
                   });

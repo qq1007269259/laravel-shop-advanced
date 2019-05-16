@@ -54,7 +54,7 @@ class Order extends Model
         'ship_status',
         'ship_data',
         'extra',
-        'type',
+        'type'
     ];
 
     protected $casts = [

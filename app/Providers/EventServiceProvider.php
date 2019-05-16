@@ -7,6 +7,7 @@ use App\Events\OrderReviewed;
 use App\Listeners\SendOrderPaidMail;
 use App\Listeners\UpdateProductRating;
 use App\Listeners\UpdateProductSoldCount;
+use App\Listeners\UpdateCrowdfundingProductProgress;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
