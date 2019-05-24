@@ -1,9 +1,7 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
 class CreateProductPropertiesTable extends Migration
 {
     /**
@@ -14,14 +12,13 @@ class CreateProductPropertiesTable extends Migration
     public function up()
     {
         Schema::create('product_properties', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('product_id');
+            $table->increments('id');
+            $table->unsignedInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->string('name');
             $table->string('value');
         });
     }
-
     /**
      * Reverse the migrations.
      *
