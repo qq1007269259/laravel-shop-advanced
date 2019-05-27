@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 
     Route::get('installments/{installment}/alipay', 'InstallmentsController@payByAlipay')->name('installments.alipay');
     Route::get('installments/alipay/return', 'InstallmentsController@alipayReturn')->name('installments.alipay.return');
+    Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store');
 });
 Route::get('products/{product}', 'ProductsController@show')->name('products.show');
 Route::post('payment/alipay/notify', 'PaymentController@alipayNotify')->name('payment.alipay.notify');
@@ -58,6 +59,7 @@ Route::post('payment/wechat/refund_notify', 'PaymentController@wechatRefundNotif
 // 后端回调不能放在 auth 中间件中
 Route::post('installments/alipay/notify', 'InstallmentsController@alipayNotify')->name('installments.alipay.notify');
 Route::post('installments/wechat/refund_notify', 'InstallmentsController@wechatRefundNotify')->name('installments.wechat.refund_notify');
+
 // Route::get('alipay', function() {
 //     return app('alipay')->web([
 //         'out_trade_no' => time(),
